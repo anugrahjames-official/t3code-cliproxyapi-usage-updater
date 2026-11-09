@@ -90,6 +90,4 @@ The VBS launchers provide manual, automatic, startup-only, and disable controls.
 
 This repository is the focused implementation reference for the report that pooled CLIProxyAPI providers accessed through separate harness profiles were missing from T3 Code's Usage Limits report. The discussion should link this repository and the companion setup report. The larger remote-host runbook is not needed to understand this issue.
 
-## Attribution and licensing
-
-The user identified the issue and created the local workaround. This repository was prepared for public review with documentation assistance from DeepSeek V4.1 Flash and GPT-6 Luna. No license is included; do not assume permission to redistribute or reuse the code without the author's permission.
+The author identified the issue and created the local workaround. This repository was prepared for public review with documentation assistance from DeepSeek V4.1 Flash and GPT-6 Luna.

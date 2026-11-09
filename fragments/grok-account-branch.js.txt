@@ -1,0 +1,28 @@
+			if (account.provider === "xai") {
+				const body = yield* apiCall(hub, account, "https://cli-chat-proxy.grok.com/v1/billing?format=credits");
+				const usage = yield* decodeGrokUsage(body);
+				const period = usage.config?.currentPeriod;
+				const periodType = period?.type?.replace(/^USAGE_PERIOD_TYPE_/, "");
+				const kind = periodType === "WEEKLY" ? "weekly" : periodType === "MONTHLY" ? "monthly" : "other";
+				let usedPercent = usage.config?.creditUsagePercent;
+				if (usedPercent === void 0 && (kind === "weekly" || kind === "monthly") && typeof period?.start === "string" && typeof period?.end === "string") {
+					const start = Date.parse(period.start);
+					const end = Date.parse(period.end);
+					if (Number.isFinite(start) && Number.isFinite(end) && start < end) usedPercent = 0;
+				}
+				const resetAt = typeof period?.end === "string" ? Date.parse(period.end) : NaN;
+				return {
+					...base,
+					plan: "Grok Subscription",
+					usageLimits: {
+						checkedAt,
+						windows: typeof usedPercent === "number" && Number.isFinite(usedPercent) ? [{
+							id: "subscription",
+							kind,
+							label: kind === "weekly" ? "Weekly" : kind === "monthly" ? "Monthly" : "Subscription",
+							usedPercent: Math.max(0, Math.min(100, usedPercent)),
+							...Number.isFinite(resetAt) ? { resetsAt: new Date(resetAt).toISOString() } : {}
+						}] : []
+					}
+				};
+			}

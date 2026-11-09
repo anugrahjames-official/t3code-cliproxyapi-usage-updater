@@ -1,0 +1,12 @@
+{
+  "name": "t3code-cliproxyapi-usage-updater",
+  "version": "1.0.0",
+  "private": false,
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "dependencies": {
+    "@electron/asar": "4.3.1"
+  }
+}

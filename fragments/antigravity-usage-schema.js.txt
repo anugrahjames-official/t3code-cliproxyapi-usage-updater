@@ -1,0 +1,26 @@
+/* T3_ANTIGRAVITY_HUB_USAGE_PATCH_V1 */
+const AntigravityBucket = Struct({
+	remainingFraction: optional$6(Number$1),
+	resetTime: optional$6(String$1),
+	bucketId: optional$6(String$1),
+	window: optional$6(String$1),
+	displayName: optional$6(String$1),
+	description: optional$6(String$1),
+	disabled: optional$6(Boolean$1)
+});
+const AntigravitySummary = Struct({
+	groups: optional$6(ArraySchema(Struct({
+		displayName: optional$6(String$1),
+		buckets: optional$6(ArraySchema(AntigravityBucket))
+	}))),
+	buckets: optional$6(ArraySchema(AntigravityBucket))
+});
+const AntigravityQuota = Struct({
+	remainingFraction: optional$6(Number$1),
+	resetTime: optional$6(String$1)
+});
+const AntigravityModels = Struct({ models: Record(String$1, Struct({
+	modelProvider: optional$6(String$1),
+	quotaInfo: optional$6(AntigravityQuota),
+	weeklyQuotaInfo: optional$6(AntigravityQuota)
+})) });

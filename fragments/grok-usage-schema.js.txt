@@ -1,0 +1,9 @@
+/* T3_GROK_HUB_USAGE_PATCH_V1 */
+const GrokUsage = Struct({ config: optional$6(Struct({
+	creditUsagePercent: optional$6(Number$1),
+	currentPeriod: optional$6(Struct({
+		type: optional$6(String$1),
+		start: optional$6(Unknown),
+		end: optional$6(String$1)
+	}))
+})) });
